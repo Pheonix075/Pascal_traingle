@@ -1,0 +1,30 @@
+def triangle(n, cache={}):
+    if n == 0:
+        return []
+    elif n == 1:
+        return [[1]]
+    elif n in cache:
+        return cache[n]
+    else:
+        History = triangle(n-1, cache)
+        current = [1]
+        prev_line = History[-1]
+        for i in range(n-2):
+            current.append(prev_line[i] + prev_line[i+1])
+        current.append(1)
+        cache[n] = History + [current]
+        return cache[n]
+    
+n = int(input("Please enter the No of Rows you want to Print: 5"))
+traingles = triangle(n)
+def Pattern_print(n):
+    k = n - 1
+    for i in range(0, n):
+        for j in range(0, k):
+            print(end=" ")
+        k = k - 1
+        for j in range(0, i+1):
+            print(traingles[i][j], end=" ")
+        print("\r")
+
+Pattern_print(n)
